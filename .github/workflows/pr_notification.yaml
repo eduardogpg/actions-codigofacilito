@@ -2,15 +2,19 @@
 name: Pull request notification
 on: pull_request
 
+env: 
+    NAME: CodigoFacilito
+
 jobs:
     first_jobs:
         runs-on: ubuntu-latest
         
         steps:
             - name: "Hola mundo"
-              run: echo "Hola mundo"
+              run: echo "Hola mundo $NAME"
 
     second_jobs:
+        if: false
         needs:
             - first_jobs
             
