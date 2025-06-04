@@ -9,12 +9,28 @@ jobs:
     first_jobs:
         runs-on: ubuntu-latest
         
+        outputs:
+            salida: hola
+            salida2: ${{ steps.step_1.outputs.my_variable }}
+
         steps:
             - name: "Hola mundo"
-              run: echo "Hola mundo $NAME"
+              id: step_1
+              run: | 
+                echo "Hola mundo $NAME"
+                echo "Hola mundo $GITHUB_OUTPUT"
+                echo "my_variable=Hola Mundo >> $GITHUB_OUTPUT
+                echo "$GITHUB_OUTPUT"
+                echo ${{ steps.step_1.outputs.my_variable }}
+
+          
 
     second_jobs:
-        if: false
+        #if: false
+
+        env:
+            SALIDA: ${{needs.first_jobs.outputs.salida2}}
+
         needs:
             - first_jobs
             
@@ -22,5 +38,5 @@ jobs:
 
         steps:
             - name: Segundo trabajo
-              run: echo "Ejecutar segundo hola mundo"
+              run: echo "Ejecutar segundo hola mundo $SALIDA"
 
