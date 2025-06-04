@@ -19,7 +19,7 @@ jobs:
               run: | 
                 echo "Hola mundo $NAME"
                 echo "Hola mundo $GITHUB_OUTPUT"
-                echo "my_variable=Hola Mundo >> $GITHUB_OUTPUT
+                echo "my_variable=Hola Mundo" >> $GITHUB_OUTPUT
                 echo "$GITHUB_OUTPUT"
                 echo ${{ steps.step_1.outputs.my_variable }}
 
