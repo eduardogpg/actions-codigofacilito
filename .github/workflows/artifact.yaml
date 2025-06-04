@@ -16,8 +16,6 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                 name: archivo-test
-                path: test.log
+                path: archivo.log
 
             
-
- 
