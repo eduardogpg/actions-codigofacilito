@@ -1,0 +1,35 @@
+name: Artifact
+
+on: push
+
+jobs: 
+    first_job:
+        runs-on: ubuntu-latest
+        
+        outputs: 
+            salida: $   
+        steps: 
+            - name: Crear log artefacto
+              run: |
+                echo "Esto es un log" >> archivo.log
+            
+            - name: Subir el archivo
+              uses: actions/upload-artifact@v4
+              with:
+                name: archivo-test
+                path: archivo.log
+
+            
+
+    segundo_job:
+        runs-on: ubuntu-latest
+        needs: first_job
+
+        steps:
+            - name: Descargar artefacto
+              uses: actions/download-artifact@v4
+              with:
+                name: archivo-test
+            
+            - name: Cat file
+              run: cat archivo.log
